@@ -14,7 +14,6 @@ function Youtube() {
 
 	useEffect(() => {
 		axios.get(url).then((json) => {
-			console.log(json.data.items);
 			setItems(json.data.items);
 		});
 	}, []);
@@ -46,6 +45,7 @@ function Youtube() {
 					);
 				})}
 			</Layout>
+
 			{isPop ? (
 				<Popup>
 					<iframe

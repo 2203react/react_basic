@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Layout from '../common/Layout';
+import Popup from '../common/Popup';
 
 function Gallery() {
 	const [items, setItems] = useState([]);
@@ -34,7 +35,6 @@ function Gallery() {
 								key={idx}
 								onClick={() => {
 									setIsPop(!isPop);
-									//리스트 클릭시 해당 리스트의 순서값으로 state변경
 									setIndex(idx);
 								}}>
 								<img
@@ -46,29 +46,20 @@ function Gallery() {
 					})}
 				</ul>
 			</Layout>
-			{isPop ? <Popup /> : null}
+
+			{isPop ? (
+				<Popup>
+					<div className='pic'>
+						<img
+							src={`https://live.staticflickr.com/${items[index].server}/${items[index].id}_${items[index].secret}_b.jpg`}
+						/>
+					</div>
+					<p>{items[index].title}</p>
+					<span onClick={() => setIsPop(!isPop)}>close</span>
+				</Popup>
+			) : null}
 		</>
 	);
-
-	function Popup() {
-		useEffect(() => {
-			document.body.style.overflow = 'hidden';
-			return () => (document.body.style.overflow = 'auto');
-		}, []);
-
-		return (
-			<aside className='popup'>
-				{/* index state값에 따라 팝업에 출력되는 내용 변경 */}
-				<div className='pic'>
-					<img
-						src={`https://live.staticflickr.com/${items[index].server}/${items[index].id}_${items[index].secret}_b.jpg`}
-					/>
-				</div>
-				<p>{items[index].title}</p>
-				<span onClick={() => setIsPop(!isPop)}>close</span>
-			</aside>
-		);
-	}
 }
 
 export default Gallery;
