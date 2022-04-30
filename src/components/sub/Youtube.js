@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import Layout from '../common/Layout';
 import Popup from '../common/Popup';
 
 function Youtube() {
+	const pop = useRef(null);
 	const [items, setItems] = useState([]);
 	const [index, setIndex] = useState(0);
 	const [loading, setLoading] = useState(false);
@@ -15,7 +16,6 @@ function Youtube() {
 	useEffect(() => {
 		axios.get(url).then((json) => {
 			setItems(json.data.items);
-			//빈 스테이트에 데이터가 닮기면 loading 스테이트를 true로 변경
 			setLoading(true);
 		});
 	}, []);
@@ -33,6 +33,7 @@ function Youtube() {
 							key={idx}
 							onClick={() => {
 								setIndex(idx);
+								pop.current.open();
 							}}>
 							<div className='inner'>
 								<div className='pic'>
@@ -47,8 +48,8 @@ function Youtube() {
 				})}
 			</Layout>
 
-			<Popup>
-				{/* laoing값이 true일때 영상출력 */}
+			{/* useRef로 컴포넌트를 참조가능 (자식컴포넌트로 forwardRef로 전달될떄 )*/}
+			<Popup ref={pop}>
 				{loading ? (
 					<iframe
 						src={
@@ -57,7 +58,7 @@ function Youtube() {
 						}
 						frameBorder='0'></iframe>
 				) : null}
-				<span>close</span>
+				<span onClick={() => pop.current.close()}>close</span>
 			</Popup>
 		</>
 	);
