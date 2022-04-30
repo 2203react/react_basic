@@ -5,8 +5,8 @@ import Popup from '../common/Popup';
 
 function Youtube() {
 	const [items, setItems] = useState([]);
-	const [isPop, setIsPop] = useState(false);
 	const [index, setIndex] = useState(0);
+	const [loading, setLoading] = useState(false);
 
 	const api_key = 'AIzaSyCCiJkX1nNqYL222H5m-0fCS65LfzyExlQ';
 	const play_list = 'PLHtvRFLN5v-UVVpNfWqtgZ6YPs9ZJMWRK';
@@ -15,6 +15,8 @@ function Youtube() {
 	useEffect(() => {
 		axios.get(url).then((json) => {
 			setItems(json.data.items);
+			//빈 스테이트에 데이터가 닮기면 loading 스테이트를 true로 변경
+			setLoading(true);
 		});
 	}, []);
 
@@ -30,7 +32,6 @@ function Youtube() {
 						<article
 							key={idx}
 							onClick={() => {
-								setIsPop(!isPop);
 								setIndex(idx);
 							}}>
 							<div className='inner'>
@@ -46,17 +47,18 @@ function Youtube() {
 				})}
 			</Layout>
 
-			{isPop ? (
-				<Popup>
+			<Popup>
+				{/* laoing값이 true일때 영상출력 */}
+				{loading ? (
 					<iframe
 						src={
 							'https://www.youtube.com/embed/' +
 							items[index].snippet.resourceId.videoId
 						}
 						frameBorder='0'></iframe>
-					<span onClick={() => setIsPop(!isPop)}>close</span>
-				</Popup>
-			) : null}
+				) : null}
+				<span>close</span>
+			</Popup>
 		</>
 	);
 }

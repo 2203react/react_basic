@@ -1,7 +1,7 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
-//1시 5분까지 갤러리 팝업도 유튜브처럼 변경해보세요.
 function Popup(props) {
+	const [open, setOpen] = useState(true);
 	useEffect(() => {
 		document.body.style.overflow = 'hidden';
 
@@ -11,9 +11,13 @@ function Popup(props) {
 	}, []);
 
 	return (
-		<aside className='popup'>
-			<div className='con'>{props.children}</div>
-		</aside>
+		<>
+			{open ? (
+				<aside className='popup'>
+					<div className='con'>{props.children}</div>
+				</aside>
+			) : null}
+		</>
 	);
 }
 
