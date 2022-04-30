@@ -12,12 +12,15 @@ const Popup = forwardRef((props, ref) => {
 	});
 
 	useEffect(() => {
-		document.body.style.overflow = 'hidden';
+		let isScroll = null;
+
+		open ? (isScroll = 'hidden') : (isScroll = 'auto');
+		document.body.style.overflow = isScroll;
 
 		return () => {
 			document.body.style.overflow = 'auto';
 		};
-	}, []);
+	}, [open]);
 
 	return (
 		// 해당 컴포넌트가 unmount시 사라지는 모션이 끝난 뒤에 DOM제거
