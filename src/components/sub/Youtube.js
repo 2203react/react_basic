@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Layout from '../common/Layout';
+import Popup from '../common/Popup';
 
-function Youtube() {	
+function Youtube() {
 	const [items, setItems] = useState([]);
 	const [isPop, setIsPop] = useState(false);
 	const [index, setIndex] = useState(0);
@@ -20,7 +21,7 @@ function Youtube() {
 
 	return (
 		<>
-			<Layout name={'Youtube'}>				
+			<Layout name={'Youtube'}>
 				{items.map((item, idx) => {
 					let desc = item.snippet.description;
 					let desc_len = desc.length;
@@ -43,34 +44,21 @@ function Youtube() {
 							</div>
 						</article>
 					);
-				})}			
+				})}
 			</Layout>
-			{isPop ? <Popup /> : null}
+			{isPop ? (
+				<Popup>
+					<iframe
+						src={
+							'https://www.youtube.com/embed/' +
+							items[index].snippet.resourceId.videoId
+						}
+						frameBorder='0'></iframe>
+					<span onClick={() => setIsPop(!isPop)}>close</span>
+				</Popup>
+			) : null}
 		</>
 	);
-
-	function Popup() {
-		useEffect(() => {
-			console.log('pop');
-			document.body.style.overflow = 'hidden';
-
-			return () => {
-				document.body.style.overflow = 'auto';
-			};
-		}, []);
-
-		return (
-			<aside className='popup'>
-				<iframe
-					src={
-						'https://www.youtube.com/embed/' +
-						items[index].snippet.resourceId.videoId
-					}
-					frameBorder='0'></iframe>
-				<span onClick={() => setIsPop(!isPop)}>close</span>
-			</aside>
-		);
-	}
 }
 
 export default Youtube;
