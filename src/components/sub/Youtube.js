@@ -48,16 +48,15 @@ function Youtube() {
 				})}
 			</Layout>
 
-			{/* useRef로 컴포넌트를 참조가능 (자식컴포넌트로 forwardRef로 전달될떄 )*/}
 			<Popup ref={pop}>
-				{loading ? (
+				{loading && (
 					<iframe
 						src={
 							'https://www.youtube.com/embed/' +
 							items[index].snippet.resourceId.videoId
 						}
 						frameBorder='0'></iframe>
-				) : null}
+				)}
 				<span onClick={() => pop.current.close()}>close</span>
 			</Popup>
 		</>
