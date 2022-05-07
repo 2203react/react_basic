@@ -1,31 +1,6 @@
 import { combineReducers } from 'redux';
 
-const initMember = {
-	members: [
-		{
-			name: 'Tom',
-			position: 'CEO',
-			pic: 'member1.jpg',
-		},
-		{
-			name: 'Julia',
-			position: 'Vice President',
-			pic: 'member2.jpg',
-		},
-		{
-			name: 'Emma',
-			position: 'Back-end Developer',
-			pic: 'member3.jpg',
-		},
-		{
-			name: 'David',
-			position: 'Designer',
-			pic: 'member4.jpg',
-		},
-	],
-};
-
-const memberReducer = (state = initMember, action) => {
+const memberReducer = (state = { members: [] }, action) => {
 	switch (action.type) {
 		case 'SET_MEMBERS':
 			return { ...state, members: action.payload };
@@ -45,9 +20,20 @@ const youtubeReducer = (state = { youtube: [] }, action) => {
 	}
 };
 
+const flickrReducer = (state = { flickr: [] }, action) => {
+	switch (action.type) {
+		case 'SET_FLICKR':
+			return { ...state, flickr: action.payload };
+
+		default:
+			return state;
+	}
+};
+
 const reducers = combineReducers({
 	memberReducer,
 	youtubeReducer,
+	flickrReducer,
 });
 
 export default reducers;

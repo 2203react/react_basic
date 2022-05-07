@@ -11,3 +11,10 @@ export const setYoutube = (data) => {
 		payload: data,
 	};
 };
+
+export const setFlickr = (data) => {
+	return {
+		type: 'SET_FLICKR',
+		payload: data,
+	};
+};
