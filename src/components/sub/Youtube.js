@@ -1,20 +1,12 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useSelector } from 'react-redux';
-import axios from 'axios';
 import Layout from '../common/Layout';
 import Popup from '../common/Popup';
 
 function Youtube() {
-	//store에 youtubeReuder데이터를 가져옴 (빈배열)
 	const vidData = useSelector((store) => store.youtubeReducer.youtube);
 	const pop = useRef(null);
-
 	const [index, setIndex] = useState(0);
-	const [loading, setLoading] = useState(false);
-
-	useEffect(() => {
-		if (vidData.length !== 0) setLoading(true);
-	}, [vidData]);
 
 	return (
 		<>
@@ -45,7 +37,7 @@ function Youtube() {
 			</Layout>
 
 			<Popup ref={pop}>
-				{loading && (
+				{vidData.length !== 0 && (
 					<iframe
 						src={
 							'https://www.youtube.com/embed/' +
