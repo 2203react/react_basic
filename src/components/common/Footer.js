@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux';
 function Footer() {
 	const path = process.env.PUBLIC_URL;
 	const members = useSelector((store) => store.memberReducer.members);
-	console.log(members);
 
 	return (
 		<footer>
