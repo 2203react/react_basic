@@ -1,7 +1,7 @@
 import { Route, Switch } from 'react-router-dom';
 import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { setYoutube } from './redux/actions';
+import { useDispatch } from 'react-redux';
+import { setYoutube, setMembers } from './redux/actions';
 import axios from 'axios';
 import Header from './components/common/Header';
 import Footer from './components/common/Footer';
@@ -14,10 +14,9 @@ import Join from './components/sub/Join';
 import Community from './components/sub/Community';
 
 import './scss/style.scss';
+const path = process.env.PUBLIC_URL;
 
 function App() {
-	//App컴포넌트함수가 실행되자마자 store의 빈 reducer 데이터를 가져옴
-	const vidData = useSelector((store) => store.youtubeReducer.youtube);
 	const dispatch = useDispatch();
 
 	const fetchYoutube = async () => {
@@ -31,16 +30,17 @@ function App() {
 		});
 	};
 
-	//App컴포넌트가 실제  출력이 되면 fetchYoutube함수를 호출해서
-	//비동기로 받아진   데이터를 리듀서를 통해서 store에 전역으로 저장해줌
+	const fetchMembers = async () => {
+		const url = path + '/DB/department.json';
+		await axios.get(url).then((json) => {
+			dispatch(setMembers(json.data.data));
+		});
+	};
+
 	useEffect(() => {
 		fetchYoutube();
+		fetchMembers();
 	}, []);
-
-	//추가된 데이터확인
-	useEffect(() => {
-		console.log(vidData);
-	}, [vidData]);
 
 	return (
 		<>
