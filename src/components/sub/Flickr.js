@@ -6,6 +6,7 @@ const path = process.env.PUBLIC_URL;
 
 function Flickr() {
 	const frame = useRef(null);
+	const input = useRef(null);
 	const [items, setItems] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [enableClick, setEnableClick] = useState(true);
@@ -39,6 +40,38 @@ function Flickr() {
 		}, 1000);
 	};
 
+	const showInterest = () => {
+		if (enableClick) {
+			setEnableClick(false);
+			setLoading(true);
+			frame.current.classList.remove('on');
+			fetchFlickr({
+				type: 'interest',
+				count: 100,
+			});
+		}
+	};
+	const showSearch = () => {
+		const tag = input.current.value.trim();
+		if (!tag) {
+			alert('검색어를 입력하세요');
+			return;
+		}
+		input.current.value = '';
+
+		if (enableClick) {
+			setEnableClick(false);
+			setLoading(true);
+			frame.current.classList.remove('on');
+
+			fetchFlickr({
+				type: 'search',
+				count: 100,
+				tag: tag,
+			});
+		}
+	};
+
 	useEffect(() => {
 		fetchFlickr({
 			type: 'interest',
@@ -48,36 +81,12 @@ function Flickr() {
 
 	return (
 		<Layout name={'Flickr'}>
-			<button
-				onClick={() => {
-					if (enableClick) {
-						setEnableClick(false);
-						setLoading(true);
-						frame.current.classList.remove('on');
-						fetchFlickr({
-							type: 'interest',
-							count: 100,
-						});
-					}
-				}}>
-				interest
-			</button>
+			<button onClick={showInterest}>interest</button>
 
-			<button
-				onClick={() => {
-					if (enableClick) {
-						setEnableClick(false);
-						setLoading(true);
-						frame.current.classList.remove('on');
-						fetchFlickr({
-							type: 'search',
-							count: 100,
-							tag: '바다',
-						});
-					}
-				}}>
-				search
-			</button>
+			<div className='searchBox'>
+				<input type='text' ref={input} />
+				<button onClick={showSearch}>search</button>
+			</div>
 
 			{loading ? (
 				<img src={path + '/img/loading.gif'} className='loading' />
