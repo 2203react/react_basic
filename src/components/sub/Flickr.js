@@ -30,20 +30,36 @@ function Flickr() {
 
 	useEffect(() => {
 		fetchFlickr({
-			type: 'search',
-			count: 100,
-			tag: '바다',
-		});
-		/*
-		fetchFlickr({
 			type: 'interest',
 			count: 500,
 		});
-    */
 	}, []);
 
 	return (
 		<Layout name={'Flickr'}>
+			<button
+				onClick={() => {
+					frame.current.classList.remove('on');
+					fetchFlickr({
+						type: 'interest',
+						count: 500,
+					});
+				}}>
+				interest
+			</button>
+
+			<button
+				onClick={() => {
+					frame.current.classList.remove('on');
+					fetchFlickr({
+						type: 'search',
+						count: 500,
+						tag: '바다',
+					});
+				}}>
+				search
+			</button>
+
 			<div className='frame' ref={frame}>
 				{items.map((item, idx) => {
 					return (
