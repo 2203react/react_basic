@@ -2,10 +2,12 @@ import Layout from '../common/Layout';
 import { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import Masonry from 'react-masonry-component';
+const path = process.env.PUBLIC_URL;
 
 function Flickr() {
 	const frame = useRef(null);
 	const [items, setItems] = useState([]);
+	const [loading, setLoading] = useState(true);
 
 	const masonryOptions = {
 		transitionDuration: '0.5s',
@@ -31,13 +33,14 @@ function Flickr() {
 
 		setTimeout(() => {
 			frame.current.classList.add('on');
+			setLoading(false);
 		}, 1000);
 	};
 
 	useEffect(() => {
 		fetchFlickr({
 			type: 'interest',
-			count: 500,
+			count: 100,
 		});
 	}, []);
 
@@ -45,10 +48,11 @@ function Flickr() {
 		<Layout name={'Flickr'}>
 			<button
 				onClick={() => {
+					setLoading(true);
 					frame.current.classList.remove('on');
 					fetchFlickr({
 						type: 'interest',
-						count: 500,
+						count: 100,
 					});
 				}}>
 				interest
@@ -56,15 +60,20 @@ function Flickr() {
 
 			<button
 				onClick={() => {
+					setLoading(true);
 					frame.current.classList.remove('on');
 					fetchFlickr({
 						type: 'search',
-						count: 500,
+						count: 100,
 						tag: '바다',
 					});
 				}}>
 				search
 			</button>
+
+			{loading ? (
+				<img src={path + '/img/loading.gif'} className='loading' />
+			) : null}
 
 			<div className='frame' ref={frame}>
 				<Masonry elementType={'div'} options={masonryOptions}>
