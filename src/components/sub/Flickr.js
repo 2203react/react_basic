@@ -84,7 +84,13 @@ function Flickr() {
 			<button onClick={showInterest}>interest</button>
 
 			<div className='searchBox'>
-				<input type='text' ref={input} />
+				<input
+					type='text'
+					ref={input}
+					onKeyUp={(e) => {
+						if (e.key === 'Enter') showSearch();
+					}}
+				/>
 				<button onClick={showSearch}>search</button>
 			</div>
 
@@ -115,3 +121,9 @@ function Flickr() {
 }
 
 export default Flickr;
+
+/*  
+keyDown : 키를 누르는 시점
+keyUp : 키를 눌렀다 떼는 시점
+keyPress : 키룰 눌렀다 떼는 시점 (한영변환 같은 특수키 안 먹음)
+*/
