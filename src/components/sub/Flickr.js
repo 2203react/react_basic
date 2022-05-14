@@ -30,6 +30,10 @@ function Flickr() {
 		}
 
 		await axios.get(url).then((json) => {
+			if (json.data.photos.photo.length === 0) {
+				alert('해당 검색어의 이미지가 없습니다.');
+				return;
+			}
 			setItems(json.data.photos.photo);
 		});
 
@@ -39,7 +43,6 @@ function Flickr() {
 			setTimeout(() => setEnableClick(true), 1000);
 		}, 1000);
 	};
-
 	const showInterest = () => {
 		if (enableClick) {
 			setEnableClick(false);
