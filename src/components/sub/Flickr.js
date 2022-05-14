@@ -8,6 +8,7 @@ function Flickr() {
 	const frame = useRef(null);
 	const [items, setItems] = useState([]);
 	const [loading, setLoading] = useState(true);
+	const [enableClick, setEnableClick] = useState(true);
 
 	const masonryOptions = {
 		transitionDuration: '0.5s',
@@ -34,6 +35,7 @@ function Flickr() {
 		setTimeout(() => {
 			frame.current.classList.add('on');
 			setLoading(false);
+			setTimeout(() => setEnableClick(true), 1000);
 		}, 1000);
 	};
 
@@ -48,25 +50,31 @@ function Flickr() {
 		<Layout name={'Flickr'}>
 			<button
 				onClick={() => {
-					setLoading(true);
-					frame.current.classList.remove('on');
-					fetchFlickr({
-						type: 'interest',
-						count: 100,
-					});
+					if (enableClick) {
+						setEnableClick(false);
+						setLoading(true);
+						frame.current.classList.remove('on');
+						fetchFlickr({
+							type: 'interest',
+							count: 100,
+						});
+					}
 				}}>
 				interest
 			</button>
 
 			<button
 				onClick={() => {
-					setLoading(true);
-					frame.current.classList.remove('on');
-					fetchFlickr({
-						type: 'search',
-						count: 100,
-						tag: '바다',
-					});
+					if (enableClick) {
+						setEnableClick(false);
+						setLoading(true);
+						frame.current.classList.remove('on');
+						fetchFlickr({
+							type: 'search',
+							count: 100,
+							tag: '바다',
+						});
+					}
 				}}>
 				search
 			</button>
