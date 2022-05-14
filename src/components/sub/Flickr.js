@@ -22,7 +22,7 @@ function Flickr() {
 
 	return (
 		<Layout name={'Flickr'}>
-			<div className='frame'>
+			<div className='frame on'>
 				{items.map((item, idx) => {
 					return (
 						<article key={idx}>
