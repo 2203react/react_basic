@@ -12,3 +12,13 @@ const store = createStore(reducers, applyMiddleware(sagaMiddleware));
 sagaMiddleware.run(rootSaga);
 
 export default store;
+
+/*
+  saga파일은 부수효과가 발생되지 않는 순수함수
+
+  순수함수 (Pure Vitual function)
+  - 부수효과를 발생시키는 코드가 없는 함수
+
+  부수효과 (SideEffect)
+  - 특정 기능을 통해서 DOM이나 화면 렌러링등의 변경점을 야기시키는 효과
+*/
