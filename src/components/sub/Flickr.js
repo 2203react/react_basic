@@ -80,9 +80,16 @@ function Flickr() {
 	};
 
 	useEffect(() => {
+		/*
 		fetchFlickr({
 			type: 'interest',
 			count: 100,
+		});
+		*/
+		fetchFlickr({
+			type: 'user',
+			count: 50,
+			user: '164021883@N04',
 		});
 	}, []);
 
