@@ -17,6 +17,5 @@ export const fetchFlickr = async (opt) => {
 		url = `https://www.flickr.com/services/rest/?method=${method_user}&api_key=${api_key}&format=json&nojsoncallback=1&per_page=${opt.count}&user_id=${opt.user}`;
 	}
 
-	//axios로 반환받은 데이터만 내보내는 순수함수 형태로 코드 변경
 	return await axios.get(url);
 };
