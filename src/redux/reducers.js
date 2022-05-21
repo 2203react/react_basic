@@ -12,18 +12,14 @@ const memberReducer = (state = { members: [] }, action) => {
 
 const youtubeReducer = (state = { youtube: [] }, action) => {
 	switch (action.type) {
-		case 'SET_YOUTUBE':
+		case 'YOUTUBE_START':
+			return { ...state };
+
+		case 'YOUTUBE_SUCCESS':
 			return { ...state, youtube: action.payload };
 
-		default:
-			return state;
-	}
-};
-
-const galleryReducer = (state = { gallery: [] }, action) => {
-	switch (action.type) {
-		case 'SET_GALLERY':
-			return { ...state, gallery: action.payload };
+		case 'YOUTUBE_ERROR':
+			return { ...state, youtube: action.payload };
 
 		default:
 			return state;
@@ -39,7 +35,7 @@ const flickrReducer = (state = { flickr: [] }, action) => {
 			return { ...state, flickr: action.payload };
 
 		case 'FLICKR_ERROR':
-			return { ...state, error: action.payload };
+			return { ...state, flickr: action.payload };
 
 		default:
 			return state;
@@ -49,7 +45,6 @@ const flickrReducer = (state = { flickr: [] }, action) => {
 const reducers = combineReducers({
 	memberReducer,
 	youtubeReducer,
-	galleryReducer,
 	flickrReducer,
 });
 

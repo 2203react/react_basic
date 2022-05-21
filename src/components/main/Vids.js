@@ -1,11 +1,17 @@
 import { useSelector } from 'react-redux';
 import Popup from '../common/Popup';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 function Vids() {
 	const vidData = useSelector((store) => store.youtubeReducer.youtube);
 	const pop = useRef(null);
 	const [index, setIndex] = useState(0);
+
+	console.log(vidData);
+
+	useEffect(() => {
+		console.log(vidData);
+	}, [vidData]);
 
 	return (
 		<>

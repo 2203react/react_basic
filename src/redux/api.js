@@ -19,3 +19,12 @@ export const fetchFlickr = async (opt) => {
 
 	return await axios.get(url);
 };
+
+export const fetchYoutube = async () => {
+	const key = 'AIzaSyCCiJkX1nNqYL222H5m-0fCS65LfzyExlQ';
+	const id = 'PLHtvRFLN5v-UVVpNfWqtgZ6YPs9ZJMWRK';
+	const num = 7;
+	const url = `https://www.googleapis.com/youtube/v3/playlistItems?key=${key}&playlistId=${id}&maxResults=${num}&part=snippet`;
+
+	return await axios.get(url);
+};

@@ -7,7 +7,6 @@ import Header from './components/common/Header';
 import Footer from './components/common/Footer';
 import Main from './components/main/Main';
 import Youtube from './components/sub/Youtube';
-import Gallery from './components/sub/Gallery';
 import Flickr from './components/sub/Flickr';
 import Department from './components/sub/Department';
 import Location from './components/sub/Location';
@@ -20,28 +19,6 @@ const path = process.env.PUBLIC_URL;
 function App() {
 	const dispatch = useDispatch();
 
-	const fetchYoutube = async () => {
-		const key = 'AIzaSyCCiJkX1nNqYL222H5m-0fCS65LfzyExlQ';
-		const id = 'PLHtvRFLN5v-UVVpNfWqtgZ6YPs9ZJMWRK';
-		const num = 7;
-		const url = `https://www.googleapis.com/youtube/v3/playlistItems?key=${key}&playlistId=${id}&maxResults=${num}&part=snippet`;
-
-		await axios.get(url).then((json) => {
-			dispatch(setYoutube(json.data.items));
-		});
-	};
-
-	const fetchGallery = async () => {
-		const api_key = 'feb5dbb632085ee9e53c197d363d1a85';
-		const method = 'flickr.interestingness.getList';
-		const per_page = 50;
-		const url = `https://www.flickr.com/services/rest/?method=${method}&api_key=${api_key}&format=json&nojsoncallback=1&per_page=${per_page}`;
-
-		await axios.get(url).then((json) => {
-			dispatch(setGallery(json.data.photos.photo));
-		});
-	};
-
 	const fetchMembers = async () => {
 		const url = path + '/DB/department.json';
 		await axios.get(url).then((json) => {
@@ -50,9 +27,9 @@ function App() {
 	};
 
 	useEffect(() => {
-		fetchYoutube();
 		fetchMembers();
-		fetchGallery();
+		dispatch({ type: 'FLICKR_START', opt: { type: 'interest', count: 100 } });
+		dispatch({ type: 'YOUTUBE_START' });
 	}, []);
 
 	return (
@@ -65,7 +42,6 @@ function App() {
 			<Route path='/department' component={Department}></Route>
 			<Route path='/community' component={Community}></Route>
 			<Route path='/youtube' component={Youtube}></Route>
-			<Route path='/gallery' component={Gallery}></Route>
 			<Route path='/flickr' component={Flickr}></Route>
 			<Route path='/location' component={Location}></Route>
 			<Route path='/join' component={Join}></Route>
