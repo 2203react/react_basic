@@ -10,6 +10,7 @@ import Department from './components/sub/Department';
 import Location from './components/sub/Location';
 import Join from './components/sub/Join';
 import Community from './components/sub/Community';
+import * as types from './redux/actionType';
 
 import './scss/style.scss';
 
@@ -17,9 +18,12 @@ function App() {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		dispatch({ type: 'FLICKR_START', opt: { type: 'interest', count: 100 } });
-		dispatch({ type: 'YOUTUBE_START' });
-		dispatch({ type: 'MEMBERS_START' });
+		dispatch({
+			type: types.FLICKR.start,
+			opt: { type: 'interest', count: 100 },
+		});
+		dispatch({ type: types.YOUTUBE.start });
+		dispatch({ type: types.MEMBERS.start });
 	}, []);
 
 	return (
