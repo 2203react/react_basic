@@ -1,8 +1,6 @@
 import { Route, Switch } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { setYoutube, setMembers, setGallery } from './redux/actions';
-import axios from 'axios';
 import Header from './components/common/Header';
 import Footer from './components/common/Footer';
 import Main from './components/main/Main';
@@ -14,22 +12,14 @@ import Join from './components/sub/Join';
 import Community from './components/sub/Community';
 
 import './scss/style.scss';
-const path = process.env.PUBLIC_URL;
 
 function App() {
 	const dispatch = useDispatch();
 
-	const fetchMembers = async () => {
-		const url = path + '/DB/department.json';
-		await axios.get(url).then((json) => {
-			dispatch(setMembers(json.data.data));
-		});
-	};
-
 	useEffect(() => {
-		fetchMembers();
 		dispatch({ type: 'FLICKR_START', opt: { type: 'interest', count: 100 } });
 		dispatch({ type: 'YOUTUBE_START' });
+		dispatch({ type: 'MEMBERS_START' });
 	}, []);
 
 	return (

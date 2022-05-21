@@ -1,4 +1,5 @@
 import axios from 'axios';
+const path = process.env.PUBLIC_URL;
 
 export const fetchFlickr = async (opt) => {
 	const api_key = 'feb5dbb632085ee9e53c197d363d1a85';
@@ -19,7 +20,6 @@ export const fetchFlickr = async (opt) => {
 
 	return await axios.get(url);
 };
-
 export const fetchYoutube = async () => {
 	console.log('fetchYoutube');
 	const key = 'AIzaSyCCiJkX1nNqYL222H5m-0fCS65LfzyExlQ';
@@ -27,5 +27,10 @@ export const fetchYoutube = async () => {
 	const num = 7;
 	const url = `https://www.googleapis.com/youtube/v3/playlistItems?key=${key}&playlistId=${id}&maxResults=${num}&part=snippet`;
 
+	return await axios.get(url);
+};
+
+export const fetchMembers = async () => {
+	const url = path + '/DB/department.json';
 	return await axios.get(url);
 };

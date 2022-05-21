@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import Popup from '../common/Popup';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
 function Vids() {
 	const { youtube } = useSelector((store) => store.youtubeReducer);
