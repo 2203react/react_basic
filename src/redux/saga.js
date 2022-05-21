@@ -28,5 +28,6 @@ export function* callYoutube() {
 }
 
 export default function* rootSaga() {
-	yield all([fork(callFlickr)], fork(callYoutube));
+	console.log('rootSaga');
+	yield all([fork(callFlickr), fork(callYoutube)]);
 }

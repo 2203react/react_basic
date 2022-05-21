@@ -21,6 +21,7 @@ export const fetchFlickr = async (opt) => {
 };
 
 export const fetchYoutube = async () => {
+	console.log('fetchYoutube');
 	const key = 'AIzaSyCCiJkX1nNqYL222H5m-0fCS65LfzyExlQ';
 	const id = 'PLHtvRFLN5v-UVVpNfWqtgZ6YPs9ZJMWRK';
 	const num = 7;
