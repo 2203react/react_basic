@@ -13,6 +13,16 @@ function Header(props) {
 	const menu = useRef(null);
 	const [toggle, setToggle] = useState(false);
 
+	const handleResize = () => {
+		const wid = window.innerWidth;
+		if (wid >= 1180) setToggle(false);
+	};
+
+	useEffect(() => {
+		window.addEventListener('resize', handleResize);
+		return () => window.removeEventListener('resize', handleResize);
+	}, []);
+
 	useEffect(() => {
 		toggle ? menu.current.open() : menu.current.close();
 	}, [toggle]);
