@@ -6,13 +6,9 @@ import 'swiper/css/navigation';
 import 'swiper/css';
 
 function Visual() {
-	//화면에 보일 swiper 패널 갯수를 관리할 state추가
 	const [num, setNum] = useState(3);
 
-	//브라우저 리사이즈시 실행할 함수
 	const handleResize = () => {
-		//혈재 브라우저폭이 데스크탑 버전보다 작아지면
-		//패널 갯수를 1로 그렇지 않으면 3으로 변경
 		const wid = window.innerWidth;
 		wid < 1180 ? setNum(1) : setNum(3);
 	};
@@ -26,7 +22,6 @@ function Visual() {
 		<figure className='myScroll'>
 			<Swiper
 				loop={true}
-				//num state값 연동
 				slidesPerView={num}
 				spaceBetween={50}
 				grabCursor={true}
