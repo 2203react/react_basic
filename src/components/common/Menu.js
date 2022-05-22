@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import { forwardRef, useImperativeHandle, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { hasSelectionSupport } from '@testing-library/user-event/dist/utils';
 
 const Menu = forwardRef((props, ref) => {
 	const [open, setOpen] = useState(false);
@@ -15,7 +16,16 @@ const Menu = forwardRef((props, ref) => {
 	return (
 		<AnimatePresence>
 			{open && (
-				<nav className='menuM'>
+				<motion.nav
+					className='menuM'
+					initial={{ x: -280, opacity: 0 }}
+					animate={{
+						x: 0,
+						opacity: 1,
+						transition: { type: 'spring', bounce: 0 },
+					}}
+					exit={{ x: -280, opacity: 0 }}
+					onClick={() => setOpen(false)}>
 					<h1>
 						<NavLink to='/'>LOGO</NavLink>
 					</h1>
@@ -40,7 +50,7 @@ const Menu = forwardRef((props, ref) => {
 							<NavLink to='/join'>Join</NavLink>
 						</li>
 					</ul>
-				</nav>
+				</motion.nav>
 			)}
 		</AnimatePresence>
 	);
