@@ -1,3 +1,4 @@
+import { useRef, useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
@@ -8,6 +9,13 @@ function Header(props) {
 	props.type === 'main'
 		? (active = { color: '#fff' })
 		: (active = { color: 'aqua' });
+
+	const menu = useRef(null);
+	const [toggle, setToggle] = useState(false);
+
+	useEffect(() => {
+		toggle ? menu.current.open() : menu.current.close();
+	}, [toggle]);
 
 	return (
 		<>
@@ -51,12 +59,16 @@ function Header(props) {
 					</li>
 				</ul>
 
-				<p className='menu'>
+				<p
+					className='menu'
+					onClick={() => {
+						setToggle(!toggle);
+					}}>
 					<FontAwesomeIcon icon={faBars} />
 				</p>
 			</header>
 
-			<Menu />
+			<Menu ref={menu} />
 		</>
 	);
 }
