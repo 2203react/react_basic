@@ -68,7 +68,7 @@ function Header(props) {
 				</p>
 			</header>
 
-			<Menu ref={menu} />
+			<Menu ref={menu} toggle={toggle} setToggle={setToggle} />
 		</>
 	);
 }
