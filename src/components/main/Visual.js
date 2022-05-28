@@ -7,8 +7,10 @@ import 'swiper/css';
 
 function Visual() {
 	const path = process.env.PUBLIC_URL;
+	const frame = useRef(null);
 	const cursor = useRef(null);
 	const [num, setNum] = useState(3);
+	let isCursor = false;
 
 	const handleResize = () => {
 		const wid = window.innerWidth;
@@ -16,8 +18,10 @@ function Visual() {
 	};
 
 	const mouseMove = (e) => {
-		cursor.current.style.left = e.clientX + 'px';
-		cursor.current.style.top = e.clientY + 'px';
+		if (isCursor) {
+			cursor.current.style.left = e.clientX + 'px';
+			cursor.current.style.top = e.clientY + 'px';
+		}
 	};
 
 	useEffect(() => {
@@ -25,11 +29,23 @@ function Visual() {
 		window.addEventListener('resize', handleResize);
 		window.addEventListener('mousemove', mouseMove);
 
-		return () => window.removeEventListener('resize', handleResize);
+		frame.current.addEventListener('mouseenter', () => {
+			isCursor = true;
+			cursor.current.style.display = 'block';
+		});
+		frame.current.addEventListener('mouseleave', () => {
+			isCursor = false;
+			cursor.current.style.display = 'none';
+		});
+
+		return () => {
+			window.removeEventListener('resize', handleResize);
+			window.removeEventListener('mousemove', mouseMove);
+		};
 	}, []);
 
 	return (
-		<figure className='myScroll'>
+		<figure className='myScroll' ref={frame}>
 			<Swiper
 				loop={true}
 				slidesPerView={num}
