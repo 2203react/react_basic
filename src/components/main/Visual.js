@@ -43,8 +43,8 @@ function Visual() {
 				{[1, 2, 3, 4, 5].map((num) => {
 					return (
 						<SwiperSlide
-							onMouseEnter={() => (cursor.current.style = 'transform: scale(8)')}
-							onMouseLeave={() => (cursor.current.style = 'transform: scale(1)')}>
+							onMouseEnter={() => (cursor.current.style = ' transform: translate(-50%, -50%) scale(8) ')}
+							onMouseLeave={() => (cursor.current.style = 'transform: translate(-50%, -50%) scale(1) ')}>
 							<video src={`${path}/img/vid${num}.mp4`} loop autoPlay muted></video>
 						</SwiperSlide>
 					);
