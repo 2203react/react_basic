@@ -69,8 +69,8 @@ figure {
 		background: #fff;
 		position: fixed;
 		border-radius: 50%;
-		top: 0px;
-		left: 0px;
+		top: -99999px;
+		left: -999999px;
 		z-index: 5;
 		mix-blend-mode: difference;
 		transform: translate(-50%, -50%);
