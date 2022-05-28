@@ -1,12 +1,13 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Navigation } from 'swiper';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import 'swiper/css';
 
 function Visual() {
 	const path = process.env.PUBLIC_URL;
+	const cursor = useRef(null);
 	const [num, setNum] = useState(3);
 
 	const handleResize = () => {
@@ -39,6 +40,8 @@ function Visual() {
 					<video src={`${path}/img/vid5.mp4`} loop autoPlay muted></video>
 				</SwiperSlide>
 			</Swiper>
+
+			<div className='cursor' ref={cursor}></div>
 		</figure>
 	);
 }
