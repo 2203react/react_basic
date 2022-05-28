@@ -6,6 +6,7 @@ import 'swiper/css/navigation';
 import 'swiper/css';
 
 function Visual() {
+	const path = process.env.PUBLIC_URL;
 	const [num, setNum] = useState(3);
 
 	const handleResize = () => {
@@ -21,21 +22,22 @@ function Visual() {
 
 	return (
 		<figure className='myScroll'>
-			<Swiper
-				loop={true}
-				slidesPerView={num}
-				spaceBetween={50}
-				grabCursor={true}
-				centeredSlides={true}
-				pagination={{ clickable: true }}
-				navigation={true}
-				modules={[Pagination, Navigation]}
-				className='swiper'>
-				<SwiperSlide>1</SwiperSlide>
-				<SwiperSlide>2</SwiperSlide>
-				<SwiperSlide>3</SwiperSlide>
-				<SwiperSlide>4</SwiperSlide>
-				<SwiperSlide>5</SwiperSlide>
+			<Swiper loop={true} slidesPerView={num} spaceBetween={50} grabCursor={true} centeredSlides={true} pagination={{ clickable: true }} navigation={true} modules={[Pagination, Navigation]} className='swiper'>
+				<SwiperSlide>
+					<video src={`${path}/img/vid1.mp4`} loop autoPlay muted></video>
+				</SwiperSlide>
+				<SwiperSlide>
+					<video src={`${path}/img/vid2.mp4`} loop autoPlay muted></video>
+				</SwiperSlide>
+				<SwiperSlide>
+					<video src={`${path}/img/vid3.mp4`} loop autoPlay muted></video>
+				</SwiperSlide>
+				<SwiperSlide>
+					<video src={`${path}/img/vid4.mp4`} loop autoPlay muted></video>
+				</SwiperSlide>
+				<SwiperSlide>
+					<video src={`${path}/img/vid5.mp4`} loop autoPlay muted></video>
+				</SwiperSlide>
 			</Swiper>
 		</figure>
 	);

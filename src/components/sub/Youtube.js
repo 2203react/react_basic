@@ -10,7 +10,7 @@ function Youtube() {
 
 	return (
 		<>
-			<Layout name={'Youtube'}>
+			<Layout name={'Youtube'} pic={'/img/pic6.jpg'}>
 				{vidData.map((item, idx) => {
 					let desc = item.snippet.description;
 					let desc_len = desc.length;
@@ -37,14 +37,7 @@ function Youtube() {
 			</Layout>
 
 			<Popup ref={pop}>
-				{vidData.length !== 0 && (
-					<iframe
-						src={
-							'https://www.youtube.com/embed/' +
-							vidData[index].snippet.resourceId.videoId
-						}
-						frameBorder='0'></iframe>
-				)}
+				{vidData.length !== 0 && <iframe src={'https://www.youtube.com/embed/' + vidData[index].snippet.resourceId.videoId} frameBorder='0'></iframe>}
 				<span onClick={() => pop.current.close()}>close</span>
 			</Popup>
 		</>

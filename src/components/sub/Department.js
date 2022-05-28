@@ -6,7 +6,7 @@ function Department() {
 	const members = useSelector((store) => store.memberReducer.members);
 
 	return (
-		<Layout name={'Department'}>
+		<Layout name={'Department'} pic={'/img/pic2.jpg'}>
 			<ul>
 				{members.map((data, idx) => {
 					return (

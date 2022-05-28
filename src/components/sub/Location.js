@@ -37,9 +37,7 @@ function Location() {
 
 	const handleTraffic = () => {
 		if (map) {
-			traffic
-				? map.addOverlayMapTypeId(kakao.maps.MapTypeId.TRAFFIC)
-				: map.removeOverlayMapTypeId(kakao.maps.MapTypeId.TRAFFIC);
+			traffic ? map.addOverlayMapTypeId(kakao.maps.MapTypeId.TRAFFIC) : map.removeOverlayMapTypeId(kakao.maps.MapTypeId.TRAFFIC);
 		}
 	};
 
@@ -56,11 +54,7 @@ function Location() {
 			map: mapInstance,
 			position: mapInfo[index].latlag,
 			title: mapInfo[index].title,
-			image: new kakao.maps.MarkerImage(
-				mapInfo[index].imgSrc,
-				mapInfo[index].imgSize,
-				mapInfo[index].imgPos
-			),
+			image: new kakao.maps.MarkerImage(mapInfo[index].imgSrc, mapInfo[index].imgSize, mapInfo[index].imgPos),
 		});
 
 		const mapInit = () => {
@@ -70,10 +64,7 @@ function Location() {
 
 		//지도 컨트롤 타입 인스턴스 생성
 		const mapTypeControl = new kakao.maps.MapTypeControl();
-		mapInstance.addControl(
-			mapTypeControl,
-			kakao.maps.ControlPosition.BOTTOMRIGHT
-		);
+		mapInstance.addControl(mapTypeControl, kakao.maps.ControlPosition.BOTTOMRIGHT);
 
 		//zoom컨트롤러 인스턴스 생성
 		const zoomControl = new kakao.maps.ZoomControl();
@@ -90,14 +81,12 @@ function Location() {
 	}, [traffic]);
 
 	return (
-		<Layout name={'Location'}>
+		<Layout name={'Location'} pic={'/img/pic5.jpg'}>
 			<h1>Location</h1>
 
 			<div id='map' ref={container}></div>
 
-			<button onClick={() => setTraffic(!traffic)}>
-				{traffic ? 'traffic ON' : 'traffic OFF'}
-			</button>
+			<button onClick={() => setTraffic(!traffic)}>{traffic ? 'traffic ON' : 'traffic OFF'}</button>
 
 			<ul>
 				{mapInfo.map((data, idx) => {

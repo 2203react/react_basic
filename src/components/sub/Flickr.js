@@ -66,7 +66,7 @@ function Flickr() {
 
 	return (
 		<>
-			<Layout name={'Flickr'}>
+			<Layout name={'Flickr'} pic={'/img/pic3.jpg'}>
 				<button onClick={showInterest}>interest</button>
 
 				<div className='searchBox'>
@@ -80,9 +80,7 @@ function Flickr() {
 					<button onClick={showSearch}>search</button>
 				</div>
 
-				{loading ? (
-					<img src={path + '/img/loading.gif'} className='loading' />
-				) : null}
+				{loading ? <img src={path + '/img/loading.gif'} className='loading' /> : null}
 
 				<div className='frame' ref={frame}>
 					<Masonry elementType={'div'} options={masonryOptions}>
@@ -96,9 +94,7 @@ function Flickr() {
 												pop.current.open();
 												setIndex(idx);
 											}}>
-											<img
-												src={`https://live.staticflickr.com/${item.server}/${item.id}_${item.secret}_m.jpg`}
-											/>
+											<img src={`https://live.staticflickr.com/${item.server}/${item.id}_${item.secret}_m.jpg`} />
 										</div>
 										<h2>{item.title}</h2>
 
@@ -106,10 +102,7 @@ function Flickr() {
 											<img
 												src={`http://farm${item.farm}.staticflickr.com/${item.server}/buddyicons/${item.owner}.jpg`}
 												onError={(e) => {
-													e.target.setAttribute(
-														'src',
-														'https://www.flickr.com/images/buddyicon.gif'
-													);
+													e.target.setAttribute('src', 'https://www.flickr.com/images/buddyicon.gif');
 												}}
 											/>
 											<span
@@ -138,11 +131,7 @@ function Flickr() {
 			</Layout>
 
 			<Popup ref={pop}>
-				{flickr.length !== 0 ? (
-					<img
-						src={`https://live.staticflickr.com/${flickr[index].server}/${flickr[index].id}_${flickr[index].secret}_b.jpg`}
-					/>
-				) : null}
+				{flickr.length !== 0 ? <img src={`https://live.staticflickr.com/${flickr[index].server}/${flickr[index].id}_${flickr[index].secret}_b.jpg`} /> : null}
 
 				<span className='close' onClick={() => pop.current.close()}>
 					close

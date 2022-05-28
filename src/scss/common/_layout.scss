@@ -1,7 +1,19 @@
 .common {
 	opacity: 0;
 	transform: translateY(200px);
-	transition: 1s;
+	//transition: 1s;
+
+	figure {
+		width: 100%;
+		height: 300px;
+		background: #111;
+
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+	}
 
 	&.on {
 		opacity: 1;

@@ -79,15 +79,11 @@ function Community() {
 	}, [posts]);
 
 	return (
-		<Layout name={'Community'}>
+		<Layout name={'Community'} pic={'/img/pic1.jpg'}>
 			<div className='inputBox'>
 				<input type='text' placeholder='제목을 입력하세요' ref={input} />
 				<br />
-				<textarea
-					cols='30'
-					rows='10'
-					placeholder='본문을 입력하세요'
-					ref={textarea}></textarea>
+				<textarea cols='30' rows='10' placeholder='본문을 입력하세요' ref={textarea}></textarea>
 				<br />
 				<button onClick={resetPosts}>cancel</button>
 				<button onClick={createPosts}>create</button>
@@ -99,15 +95,9 @@ function Community() {
 						<article key={idx}>
 							{post.enableUpdate ? (
 								<>
-									<input
-										type='text'
-										defaultValue={post.title}
-										ref={editInput}
-									/>
+									<input type='text' defaultValue={post.title} ref={editInput} />
 									<br />
-									<textarea
-										defaultValue={post.content}
-										ref={editTextarea}></textarea>
+									<textarea defaultValue={post.content} ref={editTextarea}></textarea>
 									<br />
 
 									<button onClick={() => diableUpdate(idx)}>cancel</button>
